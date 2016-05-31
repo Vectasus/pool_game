@@ -6,8 +6,12 @@ class Ball {
   float r = 5;
   boolean colliding = false;
   int ballNumb = 1;
+  float friction = 0.02;
+  
+  boolean inField;
 
   Ball(int bn) {
+    inField = false;
     pos = new PVector(10000,10000);
     vel = new PVector(0,0);
     ballNumb = bn;
@@ -16,9 +20,11 @@ class Ball {
   // Main method to operate object
   void update() {
     pos.add(vel);
-    vel.mult(0.992);
+    vel.mult(1-friction);
+    if(vel.mag() < 0.05){
+      vel.set(0,0);
+    }
     borders();
-    display();
   }
 
   // Check for bouncing off borders

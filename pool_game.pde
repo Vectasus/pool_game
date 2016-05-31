@@ -16,19 +16,38 @@ void setup() {
   
   table.placeBalls();
   
-  
+  print(balls[0].inField);
 }
 
 void draw() {  
+  
+  //draw
   background(50,150,50);
   
+  table.display();
+  
   for (int i = 0; i < balls.length; i++) {
-    balls[i].update(); 
+    if(balls[i].inField){
+      balls[i].update();
+      balls[i].display();
+    }
+  }
+  
+  //logic
+  
+  for (int b = 0; b < balls.length; b++) {
+    for (int p = 0; p < table.pockets.length; p++) {
+      PVector diff = balls[b].pos;
+      diff.sub(table.pockets[p]);
+      if(balls[b].inField && (diff.mag() < table.pr)){
+        balls[b].inField = false;
+      }
+    }
   }
   
   for (int b = 0; b < balls.length; b++) {
     for (int a = 0; a < balls.length; a++) {
-      if( a - b > 0 ){
+      if( a - b > 0 && (balls[a].inField && balls[b].inField )){
         balls[a].collideEqualMass(balls[b]);
       }
     }
