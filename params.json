@@ -1,0 +1,6 @@
+{
+  "name": "Pool game",
+  "tagline": "simple pool game in processing",
+  "body": "# Design\r\n## Collision\r\n### Ball to ball\r\n#### Condition\r\nA ball hits a ball if the magnitude of the difference vector between the ball position vectors is smaller than the combined ball radii.\r\n\r\n#### Result\r\n### Ball to wall\r\n####Condition\r\nA ball hits a wall if:\r\n\t1:  the magnitude of the difference vector between the ball position vector and a wall vertex position vector is smaller than the ball radius.\r\n\t2: the length of the line perpendicular to the line between two connected wall vertices is smaller than the ball radius.\r\n\r\n#### Result\r\nIn both cases the balls velocity is multiplied\r\n\r\n### Ball to pocket\r\n#### Condition\r\nA ball hits a pocket if the magnitude of the difference vector between the ball position vector and the pocket position vector is smaller than the pocket radius.\r\n\r\n#### Result\r\n",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
