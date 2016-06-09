@@ -1,8 +1,8 @@
 
 class Table{
   
-  PVector fieldOrigin = new PVector( 20, 20 );
-  PVector fieldSize = new PVector( width -40, height -40 );
+  PVector fieldSize = new PVector(400,200);
+  PVector fieldOrigin = new PVector( (width - fieldSize.x)/2, (height - fieldSize.x)/2);
   
   PVector fieldDiv( float xDiv, float yDiv ){
     PVector pos = new PVector( fieldOrigin.x + fieldSize.x * xDiv, fieldOrigin.y + fieldSize.y * yDiv );

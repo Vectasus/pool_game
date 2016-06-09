@@ -6,7 +6,7 @@ float cuePower = 0;
 boolean showVectors = false;
 
 void setup(){
-  size( 400, 200 );
+  fullScreen();
   for( int i = 0; i < balls.length; i++ ){
     balls[i] = new Ball( i );
   }

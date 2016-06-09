@@ -9,11 +9,16 @@ class Trajectory{
     v = startVelocity;
     t = startTime;
   }
-  Trajectory getSinceTime(float pt){ //passedTime
-    float px = 0, py = 0, vx = 0, vy = 0;
+  Trajectory getPosAtTime( float pt ){ //passedTime
+    PVector np = new PVector(), nv = new PVector();
     
-    Trajectory newTraj = new Trajectory( new PVector(px,py), new PVector(vx,vy), pt + t );
+    np.add(nv);
+    Trajectory newTraj = new Trajectory( np ,nv, pt + t );
     return newTraj;
+  }
+  
+  void display(){
+    line( p.x, p.y, p.x + v.x, p.y + v.y );
   }
 }
 
@@ -26,7 +31,7 @@ class Ball{
   boolean colliding = false;
   int ballNumb = 1;
   float friction = 0.02;
-  
+  Trajectory[] traj = new Trajectory[1];
   boolean inField;
 
   Ball( int bn ){
@@ -42,29 +47,8 @@ class Ball{
     if( vel.mag() < 0.05 ){
       vel.set( 0, 0 );
     }
-    borders();
     pos.add( vel );
   }
-
-  // Check for bouncing off borders
-  void borders(){
-    if( pos.y > height - r ){
-      vel.y *= -bounce;
-      pos.y = height - r;
-    } 
-    else if( pos.y < r ){
-      vel.y *= -bounce;
-      pos.y = r;
-    } 
-    if( pos.x > width - r ){
-      vel.x *= -bounce;
-      pos.x = width - r;
-    }  
-    else if( pos.x < r ){
-      vel.x *= -bounce;
-      pos.x = r;
-    }
-  }  
 
   // Method to display
   void display(){
@@ -86,6 +70,13 @@ class Ball{
     }
     ellipse( pos.x, pos.y, r*2, r*2 );
   }
+  
+  void bounce( PVector dir ){
+    //rotate reference frame
+    //calculate impulse on x
+    
+    //rotate reference frame back
+  }
 
   void collideEqualMass( Ball other ){
     float d = PVector.dist( pos, other.pos );
@@ -96,7 +87,6 @@ class Ball{
       colliding = true;
       // Direction of one object another
       PVector n = PVector.sub( other.pos, pos );
-      n.normalize();
 
       // Difference of velocities so that we think of one object as stationary
       PVector u = PVector.sub( vel, other.vel );
